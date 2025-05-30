@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include<Windows.h>
 #include<CommCtrl.h>
 #include<cstdio>	//sprintf
@@ -87,8 +87,8 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	break;
 	case WM_NOTIFY:
 	{
-		//Здесь лучше отслеживать изменения префикса, а изменение маски лучше отслеживать в сообщении 'WM_COMMAND',
-		//поскольку тогда маска и префикс связаны более интерактивно.
+		//Р—РґРµСЃСЊ Р»СѓС‡С€Рµ РѕС‚СЃР»РµР¶РёРІР°С‚СЊ РёР·РјРµРЅРµРЅРёСЏ РїСЂРµС„РёРєСЃР°, Р° РёР·РјРµРЅРµРЅРёРµ РјР°СЃРєРё Р»СѓС‡С€Рµ РѕС‚СЃР»РµР¶РёРІР°С‚СЊ РІ СЃРѕРѕР±С‰РµРЅРёРё 'WM_COMMAND',
+		//РїРѕСЃРєРѕР»СЊРєСѓ С‚РѕРіРґР° РјР°СЃРєР° Рё РїСЂРµС„РёРєСЃ СЃРІСЏР·Р°РЅС‹ Р±РѕР»РµРµ РёРЅС‚РµСЂР°РєС‚РёРІРЅРѕ.
 		if (wParam == IDC_IPMASK || wParam == IDC_IPADDRESS)
 		{
 			//std::cout << "WM_NOTIFY:IDC_IPMASK" << std::endl;
@@ -140,10 +140,10 @@ VOID PrintInfo(HWND hwnd)
 	dwIPprefix = atoi(sz_prefix);
 
 	DWORD dwNetworkAddress = dwIPaddress & dwIPmask;
-	sprintf(sz_NetworkIP_buffer, "Адрес сети:\t\t\t%s", IPaddressToString(dwIPaddress & dwIPmask, sz_buffer));
-	sprintf(sz_BroadcastIP_buffer, "Широковещательный адрес:\t%s", IPaddressToString(dwIPaddress | ~dwIPmask, sz_buffer));
-	sprintf(sz_NumberOfIPs, "Кодичество IP-адресов:\t%i", 1 << (32 - dwIPprefix));
-	sprintf(sz_NumberOfHosts, "Количество узлов:\t\t%i", (1 << (32 - dwIPprefix)) - 2);
+	sprintf(sz_NetworkIP_buffer, "РђРґСЂРµСЃ СЃРµС‚Рё:\t\t\t%s", IPaddressToString(dwIPaddress & dwIPmask, sz_buffer));
+	sprintf(sz_BroadcastIP_buffer, "РЁРёСЂРѕРєРѕРІРµС‰Р°С‚РµР»СЊРЅС‹Р№ Р°РґСЂРµСЃ:\t%s", IPaddressToString(dwIPaddress | ~dwIPmask, sz_buffer));
+	sprintf(sz_NumberOfIPs, "РљРѕРґРёС‡РµСЃС‚РІРѕ IP-Р°РґСЂРµСЃРѕРІ:\t%i", 1 << (32 - dwIPprefix));
+	sprintf(sz_NumberOfHosts, "РљРѕР»РёС‡РµСЃС‚РІРѕ СѓР·Р»РѕРІ:\t\t%i", (1 << (32 - dwIPprefix)) - 2);
 
 	sprintf(sz_info, "%s\n%s\n%s\n%s", sz_NetworkIP_buffer, sz_BroadcastIP_buffer, sz_NumberOfIPs, sz_NumberOfHosts);
 	SendMessage(hStaticInfo, WM_SETTEXT, 0, (LPARAM)sz_info);
