@@ -48,9 +48,9 @@ void main()
 	cout << hints.ai_addr << endl;
 
 	//3) Сщздаем сокет, который будет прослушивать Сервер:
-	SOCKET ListenSocket = 
+	SOCKET ListenSocket =
 		socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-	
+
 	if (ListenSocket == INVALID_SOCKET)
 	{
 		cout << "Error: Socket creation failed: " << WSAGetLastError() << endl;
@@ -110,16 +110,19 @@ void main()
 		}
 		else if (iResult == 0)
 		{
-			cout << "Connection closing" << endl;
+			cout << "Connection closing..." << endl;
+			closesocket(ClientSocket);
 		}
 		else
 		{
 			cout << "Error:recv() failed with code" << WSAGetLastError() << endl;
 			closesocket(ClientSocket);
-			closesocket(ListenSocket);
-			freeaddrinfo(result);
-			WSACleanup();
-			return;
+			//return;
 		}
 	} while (iResult > 0);
+	closesocket(ListenSocket);
+	freeaddrinfo(result);
+	WSACleanup();
 }
+
+//VOID HandleClient(SOCKET ClientSocket, )
