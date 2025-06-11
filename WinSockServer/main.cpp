@@ -176,7 +176,6 @@ VOID WINAPI HandleClient(SOCKET ClientSocket)
 				<< (int)peer.sin_addr.S_un.S_un_b.s_b4
 				<< endl;*/
 			cout << "Bytes received from " << address << ":" << port << " - " << iResult << " - ";
-			CHAR sz_responce[] = "Hello, I am Server! Nice to meet you!";
 			//cout << "Message: " << recvbuffer << endl;
 			cout << recvbuffer << endl;
 			CHAR sz_responce[] = "Hello, I am Server! Nice to meet you!";
